@@ -1,0 +1,36 @@
+{
+	"name": "backend-portfolio-contact",
+	"version": "1.0.0",
+	"description": "Backend API for a personal portfolio contact form using Node.js, Express, TypeScript and Nodemailer.",
+	"main": "index.js",
+	"scripts": {
+		"dev": "ts-node-dev src/index.ts",
+		"build": "tsc",
+		"start": "node dist/index.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/veljko-naumovic/backend-portfolio-contact.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "commonjs",
+	"bugs": {
+		"url": "https://github.com/veljko-naumovic/backend-portfolio-contact/issues"
+	},
+	"homepage": "https://github.com/veljko-naumovic/backend-portfolio-contact#readme",
+	"dependencies": {
+		"cors": "^2.8.5",
+		"dotenv": "^17.2.3",
+		"express": "^5.2.1",
+		"nodemailer": "^7.0.12"
+	},
+	"devDependencies": {
+		"@types/cors": "^2.8.19",
+		"@types/express": "^5.0.6",
+		"@types/node": "^25.0.9",
+		"ts-node-dev": "^2.0.0",
+		"typescript": "^5.9.3"
+	}
+}
