@@ -1,9 +1,10 @@
 import { Router, Request, Response } from "express";
 import { ContactPayload } from "../types/contact.types";
+import { sendContactMail } from "../services/mail.service";
 
 const router = Router();
 
-router.post("/", (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response) => {
 	const { name, email, message } = req.body as ContactPayload;
 
 	// Basic validation
@@ -13,17 +14,20 @@ router.post("/", (req: Request, res: Response) => {
 		});
 	}
 
-	// For now: just log (real backend behavior)
-	console.log("New contact message:", {
-		name,
-		email,
-		message,
-	});
+	try {
+		await sendContactMail({ name, email, message });
 
-	return res.status(200).json({
-		success: true,
-		message: "Contact message received",
-	});
+		return res.status(200).json({
+			success: true,
+			message: "Message sent successfully",
+		});
+	} catch (error) {
+		console.error("Contact email error:", error);
+
+		return res.status(500).json({
+			error: "Failed to send message",
+		});
+	}
 });
 
 export default router;
