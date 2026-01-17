@@ -4,6 +4,7 @@
     "outDir": "src/dist",
     "module": "commonjs",
     "target": "ES2020",
+    "skipLibCheck": true,
     "esModuleInterop": true,
     "strict": true
   }
