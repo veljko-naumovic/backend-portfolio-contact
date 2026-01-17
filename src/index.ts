@@ -18,7 +18,7 @@ app.get("/", (_req, res) => {
 	res.json({ status: "API running" });
 });
 
-app.use("/api/contact", contactRouter);
+app.use("/api", contactRouter);
 
 const PORT = process.env.PORT || 5000;
 
