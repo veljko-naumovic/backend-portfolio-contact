@@ -1,29 +1,31 @@
-import nodemailer from "nodemailer";
-import { ContactPayload } from "../types/contact.types";
+import { Resend } from "resend";
 
-const transporter = nodemailer.createTransport({
-	service: "gmail",
-	auth: {
-		user: process.env.MAIL_USER,
-		pass: process.env.MAIL_PASS,
-	},
-});
+const resend = new Resend(process.env.RESEND_API_KEY!);
 
-export const sendContactMail = async ({
+type SendContactEmailParams = {
+	name: string;
+	email: string;
+	message: string;
+};
+
+export async function sendContactEmail({
 	name,
 	email,
 	message,
-}: ContactPayload): Promise<void> => {
-	await transporter.sendMail({
-		from: `"Portfolio Contact" <${process.env.MAIL_USER}>`,
-		to: process.env.MAIL_TO,
+}: SendContactEmailParams) {
+	await resend.emails.send({
+		from: process.env.EMAIL_FROM!,
+		to: [process.env.EMAIL_TO!],
 		subject: `New contact message from ${name}`,
-		html: `
-      <h3>New Contact Message</h3>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Message:</strong></p>
-      <p>${message}</p>
+		replyTo: email,
+		text: `
+You have received a new message from your portfolio contact form.
+
+Name: ${name}
+Email: ${email}
+
+Message:
+${message}
     `,
 	});
-};
+}
