@@ -6,9 +6,15 @@ import contactRouter from "./routes/contact.route";
 
 const app = express();
 
+const allowedOrigins: string[] = ["http://localhost:5173"];
+
+if (process.env.FRONTEND_URL) {
+	allowedOrigins.push(process.env.FRONTEND_URL);
+}
+
 app.use(
 	cors({
-		origin: ["http://localhost:5173", process.env.FRONTEND_URL].filter(Boolean) as string[];,
+		origin: allowedOrigins,
 	}),
 );
 
