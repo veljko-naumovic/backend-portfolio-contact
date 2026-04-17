@@ -6,7 +6,10 @@ import contactRouter from "./routes/contact.route";
 
 const app = express();
 
-const allowedOrigins: string[] = ["http://localhost:5173"];
+const allowedOrigins: string[] = [
+	"http://localhost:5173",
+	"https://veljko-naumovic-portfolio.web.app/",
+];
 
 if (process.env.FRONTEND_URL) {
 	allowedOrigins.push(process.env.FRONTEND_URL);
