@@ -15,11 +15,7 @@ if (process.env.FRONTEND_URL) {
 	allowedOrigins.push(process.env.FRONTEND_URL);
 }
 
-app.use(
-	cors({
-		origin: allowedOrigins,
-	}),
-);
+app.use(cors());
 
 app.use(express.json());
 
